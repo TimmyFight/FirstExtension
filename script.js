@@ -23,6 +23,12 @@ function Calendar(input, options) {
         this.divCnt.classList.remove('calendar-show');
     }
 
+    this.createDateText = function () {
+        const monthNames = ['styczeń', 'luty', 'marzec', 'kwiecień', 'maj', 'czerwiec', 'lipiec', 'sierpień', 'wrzesień', 'październik', 'listopad', 'grudzień'];
+    
+        this.divDateText.innerHTML = monthNames[this.month] + ' ' + this.year;
+    };
+
     // metoda inicjująca
     this.init = function () {
         //dodajemy inputowi klasę, która doda ikonę kalendarza i zmieni kursor
@@ -39,6 +45,7 @@ function Calendar(input, options) {
         // tworzymy div z nazwą miesiąca i roku
         this.divDateText = document.createElement('div');
         this.divDateText.className = 'data-name';
+        this.createDateText();
 
         // div z przyciskami prev, next i div z nazwą miesiąca 
         // wrzucamy do wspólnego diva .calendar-header
@@ -76,7 +83,7 @@ function Calendar(input, options) {
             this.hide();
         }.bind(this));
         
-        //nasz div z zawartością wrzucamy na koniec body
+        // nasz div z zawartością wrzucamy na koniec body
         this.calendarWrapper.appendChild(this.divCnt);
     };
 };
