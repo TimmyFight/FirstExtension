@@ -28,6 +28,115 @@ function Calendar(input, options) {
     
         this.divDateText.innerHTML = monthNames[this.month] + ' ' + this.year;
     };
+            //metoda tworząca guziki 
+            this.createButtons = function () { 
+                //Przycisk "Poprzedni miesią" 
+                const buttonPrev = document.createElement('button');
+                buttonPrev.innerText = "<";
+                buttonPrev.type = "button";
+                buttonPrev.classList.add('input-prev');
+                buttonPrev.addEventListener('click', function () {
+                    this.month--;
+                    if (this.month < 0){
+                        this.month = 11;
+                        this.year--;
+                    }
+                    this.createCalendarTable();
+                    this.createDateText();
+                }.bind(this));
+                this.divButtons.appendChild(buttonPrev);
+
+                //Przycisk "Natępny miesiąc"
+                const buttonNext = document.createElement('button');
+                buttonNext.classList.add('input-next');
+                buttonNext.innerText = '>';
+                buttonNext.type = "button";
+                buttonNext.addEventListener('click', function() {
+                    this.month++;
+                    if(this.month > 11) {
+                        this.month = 0;
+                        this.year++;
+                    }
+                    this.createCalendarTable();
+                    this.createDateText();
+                }.bind(this));
+                this.divButtons.appendChild(buttonNext);
+            };
+
+            //Metoda tworząca tabele z dniami kalendarza
+            this.createCalendarTable = function () {
+                //czyścimy div z tabelą = '';
+                this.divTable.innerHTML = '';
+
+                //tworzymy tabelę z dniami kalendarza
+                const tab = document.createElement('table');
+                tab.classList.add('calendar-table');
+    
+                //tabelę dołączamy do div divTable
+                this.divTable.appendChild(tab);
+    
+                //tworzymy nagłówki dni 
+                let tr = document.createElement('tr');
+                tr.classList.add('calendar-table-day-names')
+                const days = ['Pn', 'Wt', 'Sr', 'Cz', 'Pt', 'So', 'Nd'];
+                for(let i=0; i<days.length; i++) {
+                    const th = document.createElement('th');
+                    th.innerHTML = days[i];
+                    tr.appendChild(th);
+                }
+                tab.appendChild(tr);
+    
+                //pobieramy wszystkie dni w miesiącu
+                const daysInMonth = new Date(this.year, this.month+1, 0).getDate();
+    
+                //pobieramy pierwszy dzień miesiąca 
+                const tempDate = new Date(this.year, this.month, 1);
+                let firstMonthDay = tempDate.getDay();
+    
+                //ustawienie poniedziałku jako pierwszy dzień tygodnia
+                if(firstMonthDay === 0) {
+                    firstMonthDay = 7;
+                }
+    
+                //liczba wszystkich komórek - i pustych i z dniami 
+                const j = daysInMonth + firstMonthDay - 1;
+    
+                if (firstMonthDay - 1 !== 0) {
+                    tr= document.createElement('tr');
+                    tab.appendChild(tr);
+                }
+    
+                //na początku generujemy puste komórki
+    
+                for (let i=0; i < firstMonthDay - 1; i++) {
+                    const td = document.createElement('td');
+                    td.innerHTML = '';
+                    tr.appendChild(td);
+                }
+    
+                //generujemy komórki z dniami miesiąca
+                for (let i = firstMonthDay-1; i<j; i++) {
+                    if((i % 7) == 0) {
+                        tr = document.createElement('tr');
+                        tab.appendChild(tr);
+                    } 
+    
+                    const td = document.createElement('td');
+                    td.innerText = i - firstMonthDay + 2;
+                    td.dayNr = i - firstMonthDay + 2;
+                    td.classList.add('day');
+    
+                    if (this.year === this.now.getFullYear() && this.month === this.now.getMonth() && this.day === i - firstMonthDay + 2) {
+                        td.classList.add('current-day')
+                    }
+    
+                    tr.appendChild(td);
+                }
+
+                tab.appendChild(tr);
+
+                this.divTable.appendChild(tab);
+            };
 
     // metoda inicjująca
     this.init = function () {
@@ -38,13 +147,14 @@ function Calendar(input, options) {
         this.divCnt = document.createElement('div');
         this.divCnt.classList.add('calendar');
 
-        // tworzymy div zawierający przyciski prev i next
+        // tworzymy div z guzikami
         this.divButtons = document.createElement('div');
-        this.divButtons.className = 'calendar-prev-next';
+        this.divButtons.className = "calendar-prev-next";
+        this.createButtons();
 
         // tworzymy div z nazwą miesiąca i roku
         this.divDateText = document.createElement('div');
-        this.divDateText.className = 'data-name';
+        this.divDateText.className = 'date-name';
         this.createDateText();
 
         // div z przyciskami prev, next i div z nazwą miesiąca 
@@ -56,10 +166,11 @@ function Calendar(input, options) {
         this.divHeader.appendChild(this.divDateText);
         this.divCnt.appendChild(this.divHeader);
 
-        // tworzymy div do którego trafi tabela kalendarza
+        // tworzymy div z tabelą kalnedarza
         this.divTable = document.createElement('div');
         this.divTable.className = 'calendar-table-cnt';
         this.divCnt.appendChild(this.divTable);
+        this.createCalendarTable();
 
         // tworzymy wrapper dla input
         this.calendarWrapper = document.createElement('div');
