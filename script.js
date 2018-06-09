@@ -100,7 +100,8 @@ function Calendar(input, options) {
                 this.bindTableDaysEvent = function() {
                     this.divTable.addEventListener('click', function(e) {
                         if(e.target.tagName.toLowerCase() === 'td' && e.target.classList.contains('day')) {
-                            const month2 = ((this.month + 1) < 10) ? "0" + (this.month + 1) : this.month + 1;                            if (this.options.closeOnSelect) {
+                            const month2 = ((this.month + 1) < 10) ? "0" + (this.month + 1) : this.month + 1;                            
+                            if (this.options.closeOnSelect) {
                                 this.hide();
                             }
                             this.options.onDateSelect(e.target.dayNr, this.month + 1, this.year);
