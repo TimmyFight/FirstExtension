@@ -1,132 +1,153 @@
-body{
-    margin: 0;
-    color: #5d5d5d;
-    background: #fff;
+#dialog-jg,
+#dialog-adrianC {
+    all: unset;
+    width: 30%;
+    border: 1px solid #d6d6d6;
+    margin-left: 35%;
+    margin-right: 35%;
+    position: fixed;
+    height: 300px;
+    overflow: scroll;
+    top: 100px;
+    z-index: 100 !important;
+}
+
+.elipsis {
+    display: inline-block;
+    width: 300px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+#dialog-jg-ol,
+#dialog-adrianC-ol {
+    background: white;
+    margin-left: 0px;
+}
+
+#dialog-jg-ol li:first-child,
+#dialog-adrianC-ol li:first-child {
+    padding-top: 30px;
+}
+
+#dialog-jg-ol li:last-child,
+#dialog-adrianC-ol li:last-child {
+    padding-bottom: 20px;
+}
+
+#dialog-adrianC-ol li {
+    background: white;
+    padding: 0px 15px;
+}
+
+#dialog-jg-ol li {
+    background: white;
+    padding: 5px 15px;
+}
+
+#jg-drp-tb123 {
+    position: relative;
+    z-index: 1000000 !important;
+    height: 23px !important;
+    all: unset;
+    font-family: "Lucida Grande", "Lucida Sans Unicode", sans-serif;
+    display: none;
+    color: white !important;
+    border-left: 3px double #d9d9d9 !important;
+}
+
+;
+.batonki-cbx {
+    width: 20px !important;
+}
+
+.imgAdrianC,
+#openall {
+    max-width: 15px !important;
+    cursor: pointer !important;
+    padding-left: 10px !important;
+    all: unset;
+}
+
+;
+input#reloadCB {
+    position: relative !important;
+    top: 3px !important;
+    left: 0px !important;
+}
+
+#closure,
+#mainnode,
+#opening,
+#openallclick,
+#copynodeclick,
+#copyToClipAC,
+#macoverlayclick {
+    cursor: pointer;
+}
+
+#closure:hover,
+#mainnode:hover,
+#opening:hover,
+#openallclick:hover,
+#copynodeclick:hover,
+copyToClipAC:hover,
+#macoverlayclick:hover {
+    color: #d9d9d9;
+    cursor: pointer;
+}
+
+#popup1 {
+    border: 1px solid red;
+    width: 30%;
+    width: 40% !important;
+    height: 200px !important;
+    background: grey;
+    margin-left: 30% !important;
+    margin-right: 30% !important;
+    /* text-align: center !important; */
+    position: fixed !important;
+    z-index: 100000000000 !important;
+    background: white !important;
+    overflow: scroll !important;
+    padding: 10px !important;
+}
+
+#mainnode {
+    display: inline;
+}
+
+#openallclick {
+    display: inline;
+}
+
+#copynodeclick {
+    display: none;
+}
+
+#macoverlayclick {
+    display: none;
+}
+
+#ddpPuhtoolButton{ 
     font-family: "Open Sans",sans-serif;
     line-height: 1.8em;
-}
-
-#container{
-    position: absolute;
-    top: 5%;
-    left: 5%;
-}
-
-/* wrapper dla inputa kalendarza */
-.input-calendar-cnt {
-    position: relative;
+    font-size: 12px; 
+    padding: .8em 3em;
+    margin-bottom: 20px;
+    background: #8c8c8c;
+    color: #fff;
+    border: 0;
+    text-decoration: none;
     display: inline-block;
+    font-weight: 700;
+    border-radius: .2rem;
+    transition: .5s background-color,.5s box-shadow;
+    cursor: pointer;
 }
 
-/* input kalendarza */
-.input-calendar {
-    background-image: url(./icon-calendar.png);
-    background-position: 99% center;
-    background-repeat: no-repeat;
-    border:1px solid #ddd;
-    cursor:pointer;
-    padding: 10px;
-}
-
-/* kalendarz */
-.calendar {
-    position: absolute;
-    top:100%;
-    left:0;
-    width: 300px;
-    background: #fff;
-    min-height: 300px;
-    padding: 5px;
-    border: 1px solid #ddd;
-    box-shadow:2px 2px 1px rgba(0,0,0,0.1);
-    font-family: sans-serif;
-    display: none;
-    z-index: 100;
-}
-
-.calendar.calendar-show {
-    display: block;
-}
-
-/* przyciski prev-next */
-.calendar-prev-next {
-    height:30px;
-    display: flex;
-    justify-content: space-between;
-}
-.calendar .input-prev,
-.calendar .input-next {
-    position: relative;
-    z-index: 1;
-    cursor:pointer;
-    width: 30px;
-    font-family: sans-serif;
-    background-color: transparent;
-    border:0;
-    color: #333;
-}
-.calendar .input-prev:hover,
-.calendar .input-next:hover {
-    background:#D1EBFD;
-}
-
-/* nazwa miesiąca i roku */
-.calendar .date-name {
-    font-size:12px;
-    color: #666;
-    padding: 0 40px;
-    text-align: center;
-    line-height: 30px;
-    position: absolute;
-    left:0;
-    top:0;
-    width:100%;
-    text-align: center;
-    box-sizing: border-box;
-}
-
-/* nagłówek kalendarza */
-.calendar .calendar-header {
-    height:30px;
-    position: relative;
-}
-
-/* tabela kalendarza */
-.calendar .calendar-table-cnt {
-    position: relative;
-    padding-top:10px;
-}
-.calendar .calendar-table {
-    font-size:12px;
-    color: #666;
-    width: 100%;
-}
-.calendar .calendar-table td {
-    text-align: center;
-    width:14.2857%;
-}
-.calendar .calendar-table th {
-    font-family: sans-serif;
-    font-weight: normal;
-    padding-bottom: 10px;
-    font-size:11px;
-    color:#aaa;
-}
-.calendar .calendar-table td.day {
-    background: #fafafa;
-    height:40px;
-    font-size:11px;
-    font-family: sans-serif;
-    font-weight:bold;
-}
-.calendar .calendar-table td.day:hover {
-    background: #D1EBFD;
-    cursor: pointer
-}
-.calendar .calendar-table td.current-day {
-    background-color: #F15C5C;
-    color:#fff;
-}
-.calendar .calendar-table td.current-day:hover {
-    background-color: #DE5858;
+#ddpPuhtoolButton:hover, .clicked {
+    background: #474747 !important;
+    color: #fff;
 }

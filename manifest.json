@@ -1,0 +1,32 @@
+{
+  "manifest_version": 2,
+
+  "name": "ELC Drupal Tool Popup",
+  "description": "Additional options for drupal ELC sites",
+  "version": "1.0",    
+  "browser_action": {
+    "default_icon": "icon.png"
+  },
+  "icons" : {
+    "64" : "icon.png" 
+  },  
+    "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "css": ["style.css"], 
+      "js": ["jquery.js", "myscript.js"]  
+    }   
+    ],
+    "web_accessible_resources": [
+        "close.png", 
+        "home.png", 
+        "open.png", 
+        "all.png", 
+        "close2.png",
+        "copy.png",
+        "copy2.png",
+        "macoverlay.png",
+        "akamai.png"
+  ], 
+    "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'"
+}
